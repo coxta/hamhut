@@ -1,19 +1,3 @@
-<!--
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ]
-  }
-  ```
--->
 <header class="bg-gray-800" x-data="{ mobileNav: false }">
     <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8">
         <div class="relative h-16 flex justify-between">
@@ -21,14 +5,26 @@
             <!-- Brand -->
             <div class="relative z-10 px-2 flex lg:px-0">
                 <div class="flex-shrink-0 flex items-center">
+                    @auth
                     <a href="{{ route('home') }}">
                         <img class="block h-8 w-auto" src="{{ secure_asset('radio.svg') }}" alt="Workflow">
                     </a>
+                    @else
+                    <a href="{{ route('visitor') }}">
+                        <img class="block h-8 w-auto" src="{{ secure_asset('radio.svg') }}" alt="Workflow">
+                    </a>
+                    @endauth
                 </div>
                 <div class="hidden md:flex-shrink-0 md:flex items-center">
+                    @auth
                     <a href="{{ route('home') }}">
                         <img class="block h-8 w-auto" src="{{ secure_asset('hamhut.svg') }}" alt="Workflow">
                     </a>
+                    @else
+                    <a href="{{ route('visitor') }}">
+                        <img class="block h-8 w-auto" src="{{ secure_asset('hamhut.svg') }}" alt="Workflow">
+                    </a>
+                    @endauth
                 </div>
             </div>
 
@@ -77,41 +73,49 @@
             </div>
             <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
 
-                <!-- Guest -->
+                @auth
+                <!-- Authenticated -->
+                <!-- <button class="bg-gray-800 flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <span class="sr-only">View notifications</span>
+                    <x-heroicon-o-bell class="w-7 h-7"/>
+                </button> -->
+
+                <!-- Profile dropdown -->
+                <div x-data="{ open: false }" class="flex-shrink-0 rounded-full p-1">
+                    <div>
+                        <button @click="open = !open" class="bbg-gray-800 rounded-full flex items-center text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="options-menu" aria-haspopup="true" aria-expanded="true">
+                            <span class="sr-only">Profile</span>
+                            {{ Auth()->user()->name }}
+                            <x-heroicon-s-user-circle class="ml-2 w-6 h-6" />
+                        </button>
+                    </div>
+
+                    <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-100 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75 transform" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Profile</a>
+
+                            <form method="POST" action="logout">
+                                <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                    Logout
+                                </a>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                @else
+                <!-- Visitor -->
                 <div class="justify-between">
-                    <a type="button" href="{{ route('login') }}" class="mr-2 inline-flex items-center px-3 py-2 border border-yellow-500 text-sm leading-4 font-medium rounded-md text-yellow-500 bg-transparent hover:bg-yellow-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                    <a href="{{ route('login') }}" class="mr-2 inline-flex items-center px-3 py-2 text-sm leading-4 font-medium rounded-md text-yellow-500 bg-transparent hover:bg-yellow-300 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
                         Login
                     </a>
                     <a type="button" href="{{ route('register') }}" class="ml-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-gray-800 bg-yellow-500 hover:bg-white hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
                         Register
                     </a>
                 </div>
+                @endauth
 
-                <!-- Authenticated -->
-                <!-- <button class="bg-gray-800 flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <span class="sr-only">View notifications</span>
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                    </svg>
-                </button> -->
-
-                <!-- Profile dropdown -->
-                <!-- <div x-data="{ open: false }" class="flex-shrink-0 relative ml-4">
-                    <div>
-                        <button @click="open = !open" class="bg-gray-800 rounded-full flex text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
-                            <span class="sr-only">Open user menu</span>
-                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=p3JfIOb8nb&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                        </button>
-                    </div>
-
-                    <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-100 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75 transform" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your Profile</a>
-
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
-
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>

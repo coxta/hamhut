@@ -1,3 +1,3 @@
 <x-app-layout>
-    Welcome
+    Visitor
 </x-app-layout>

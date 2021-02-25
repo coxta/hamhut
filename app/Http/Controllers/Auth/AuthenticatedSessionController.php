@@ -49,6 +49,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+        $request->session()->flash('alert-type', 'success');
+        $request->session()->flash('alert', 'Successfully logged out of your account');
+
         return redirect('/');
     }
 }
