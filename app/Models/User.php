@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Local Dynamic Scope
+    public function scopeLicensed($query, $bool)
+    {
+        return $query->where('licensed', $bool);
+    }
 }

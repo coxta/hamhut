@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('visitor');
-})->name('visitor')->middleware('guest');
+Route::get('/', [UserController::class, 'visitor'])
+                ->middleware('guest')
+                ->name('visitor');
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home')->middleware('auth');
+Route::get('/home', [UserController::class, 'home'])
+                ->middleware('auth')
+                ->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
