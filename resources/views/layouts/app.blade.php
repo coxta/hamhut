@@ -30,7 +30,7 @@
 
         <!-- Alerts -->
         @if(session()->has('alert'))
-            <x-alert />
+        <x-alert />
         @endif
 
         <!-- Side Nav -->

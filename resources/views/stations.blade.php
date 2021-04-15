@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Operators
+        Stations
     </x-slot>
-    Operators
+    <livewire:call-search/>
 </x-app-layout>

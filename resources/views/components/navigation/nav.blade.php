@@ -9,7 +9,8 @@
     @else
     <x-navigation.nav-link type="side" label="Home" icon="home" href="{{ route('visitor') }}" active="{{ Route::currentRouteName() == 'visitor' }}" />
     @endauth
-    <x-navigation.nav-link type="side" label="Operators" icon="microphone" href="{{ route('operators') }}" active="{{ Route::currentRouteName() == 'operators' }}" />
+    <x-navigation.nav-link type="side" label="Stations" icon="microphone" href="{{ route('stations') }}" active="{{ Route::currentRouteName() == 'stations' }}" />
+    <x-navigation.nav-link type="side" label="Favorites" icon="star" href="{{ route('favorites') }}" active="{{ Route::currentRouteName() == 'favorites' }}" />
     <x-navigation.nav-link type="side" label="Events" icon="calendar" href="{{ route('calendar') }}" active="{{ Route::currentRouteName() == 'calendar' }}" />
 
   </div>
@@ -56,7 +57,8 @@
     @else
     <x-navigation.nav-link type="mobile" label="Home" icon="home" href="{{ route('visitor') }}" active="{{ Route::currentRouteName() == 'visitor' }}" />
     @endauth
-    <x-navigation.nav-link type="mobile" label="Operators" icon="microphone" href="{{ route('operators') }}" active="{{ Route::currentRouteName() == 'operators' }}" />
+    <x-navigation.nav-link type="mobile" label="Stations" icon="microphone" href="{{ route('stations') }}" active="{{ Route::currentRouteName() == 'stations' }}" />
+    <x-navigation.nav-link type="mobile" label="Favorites" icon="star" href="{{ route('favorites') }}" active="{{ Route::currentRouteName() == 'favorites' }}" />
     <x-navigation.nav-link type="mobile" label="Events" icon="calendar" href="{{ route('calendar') }}" active="{{ Route::currentRouteName() == 'calendar' }}" />
 
   </div>

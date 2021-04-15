@@ -17,9 +17,13 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/operators', function () {
-    return view('operators');
-})->name('operators');
+Route::get('/stations', function () {
+    return view('stations');
+})->name('stations');
+
+Route::get('/favorites', function () {
+    return view('favorites');
+})->name('favorites');
 
 Route::get('/calendar', function () {
     return view('calendar');

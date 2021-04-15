@@ -39,7 +39,7 @@
                                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input id="search" name="search" class="block w-full bg-gray-700 border border-transparent rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 focus:placeholder-gray-500 sm:text-sm" placeholder="Search" type="search">
+                        <input wire:model="" id="search" name="search" class="block w-full bg-gray-700 border border-transparent rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 focus:placeholder-gray-500 sm:text-sm" placeholder="Search" type="search">
                     </div>
                 </div>
             </div>
@@ -85,7 +85,11 @@
                     <div>
                         <button @click="open = !open" class="bbg-gray-800 rounded-full flex items-center text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="options-menu" aria-haspopup="true" aria-expanded="true">
                             <span class="sr-only">Profile</span>
-                            {{ Auth()->user()->name }}
+                            @if(Auth()->user()->licensed)
+                                {{ Auth()->user()->call }}
+                            @else
+                                {{ Auth()->user()->name }}
+                            @endif
                             <x-heroicon-s-user-circle class="ml-2 w-6 h-6" />
                         </button>
                     </div>
