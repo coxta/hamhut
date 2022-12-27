@@ -1,21 +1,26 @@
 <?php
 
+use App\Http\Controllers\ULSController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
 Route::get('/', [UserController::class, 'visitor'])
-                ->middleware('guest')
-                ->name('visitor');
+    ->middleware('guest')
+    ->name('visitor');
 
 Route::get('/home', [UserController::class, 'home'])
-                ->middleware('auth')
-                ->name('home');
+    ->middleware('auth')
+    ->name('home');
+
+Route::get('/sync', [ULSController::class, 'sync_comments'])
+    ->middleware('auth')
+    ->name('sync');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/stations', function () {
     return view('stations');

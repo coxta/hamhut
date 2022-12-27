@@ -5,7 +5,7 @@
 
         <div class="mt-4">
             <div class="mt-1">
-                <input wire:model="sign" type="text" name="call" id="call" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="callsign">
+                <input wire:model.lazy="sign" type="text" name="call" id="call" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="callsign">
             </div>
         </div>
 
