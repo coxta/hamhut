@@ -3,6 +3,7 @@
 use App\Http\Controllers\ULSController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Repeaters;
 
 Route::get('/', [UserController::class, 'visitor'])
     ->middleware('guest')
@@ -25,6 +26,8 @@ require __DIR__ . '/auth.php';
 Route::get('/stations', function () {
     return view('stations');
 })->name('stations');
+
+Route::get('/repeaters', Repeaters::class)->name('repeaters');
 
 Route::get('/favorites', function () {
     return view('favorites');

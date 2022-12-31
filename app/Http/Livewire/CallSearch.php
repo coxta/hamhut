@@ -16,6 +16,12 @@ class CallSearch extends Component
     public $provider = 'https://callook.info';
     public $format = 'json';
 
+    public $logs;
+
+    public function mount()
+    {
+        $this->getLogs();
+    }
 
     public function render()
     {
@@ -68,10 +74,19 @@ class CallSearch extends Component
             $this->sign = null;
             $this->ham = null;
         }
+
+        $this->getLogs();
+
     }
 
     public function url()
     {
         return $this->provider . '/' . $this->sign . '/' . $this->format;
     }
+
+    public function getLogs()
+    {
+        $this->logs = UserContact::where('user_id',auth()->id())->latest()->take(15)->get();
+    }
+
 }

@@ -19,10 +19,13 @@
             </h3>
             <div class="mt-2 max-w-xl text-sm text-gray-500">
                 <p>
-                {{ $ham['name'] }}
+                    {{ $ham['name'] }}
                 </p>
                 <p>
-                {{ $ham['address']['line2'] }}
+                    {{ $ham['address']['line1'] }}
+                </p>
+                <p>
+                    {{ $ham['address']['line2'] }}
                 </p>
             </div>
             <div class="mt-5">
@@ -40,5 +43,26 @@
         <p>No results for "<strong>{{ $sign }}</strong>"</p>
     </div>
     @endif
+
+    <div class="bg-white rounded overflow-hidden shadow px-4 py-4 mt-4">
+
+        <h1>Recent Logs</h1>
+
+        <div class="mt-4">
+
+            <ul class="divide-y divide-gray-200">
+
+            @foreach ($logs as $log)
+                <li class="flex justify-between py-1.5">
+                    <div>{{ $log->call }}</div>
+                    <div>{{ \Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i') }}</div>
+                </li>
+            @endforeach
+
+            </ul>
+
+        </div>
+
+    </div>
 
 </div>
